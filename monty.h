@@ -10,6 +10,8 @@
 		{"push", push},\
 		{"pall", pall},\
 		{"pint", pint},\
+		{"pop", pop},\
+		{"swap", swap},\
 		{NULL, NULL} \
 	};
 
@@ -58,10 +60,12 @@ typedef struct omni_p
 omni global;
 void push(stack_t **stack, unsigned int line_number);
 void pall(stack_t **stack, unsigned int line_number __attribute__((unused)));
-void pint(stack_t **stack, unsigned int line_number);
 stack_t *add_node(stack_t **stack, int i);
 void print_all(stack_t **stack);
 void free_all(stack_t **stack);
 instruction_t instruct(instruction_t opc[], char *in, unsigned int l);
+void pop(stack_t **stack, unsigned int line_number);
+void pint(stack_t **stack, unsigned int line_number);
+void swap(stack_t **stack, unsigned int line_number);
 
 #endif

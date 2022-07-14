@@ -10,10 +10,10 @@ void push(stack_t **stack, unsigned int line_number)
 {
 	char *ptr = global.value;
 
-	if (isdigit(ptr) != 0)
+	if (atoi(ptr) == 0)
 	{
-		add_node(stack, atoi(ptr));
+		fprintf(stderr, "L%d: usage: push integer\n", line_number);
+		exit(EXIT_FAILURE);
 	}
-	fprintf(stderr, "L%d: usage: push integer\n", line_number);
-	exit(EXIT_FAILURE);
+	add_node(stack, atoi(ptr));
 }

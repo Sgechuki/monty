@@ -39,7 +39,9 @@ int main(int argc, char *argv[])
 		line_no++;
 	}
 	if (line != NULL)
+	{
 		free(line);
+	}
 	free_all(&top);
 	fclose(fp);
 	return (0);
