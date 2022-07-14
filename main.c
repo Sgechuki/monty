@@ -43,8 +43,10 @@ int main(int argc, char *argv[])
 		code[0].f(&top, line_no);
 		line_no++;
 	}
-	if (!line)
+	if (line != NULL)
+	{
 		free(line);
+	}
 	free_all(&top);
 	fclose(fp);
 	return (0);
