@@ -8,7 +8,8 @@
  */
 int main(int argc, char *argv[])
 {
-	char line[100], *ptr1;
+	char *line = NULL, *ptr1;
+	size_t len = 0;
 	stack_t *top = NULL;
 	FILE *fp;
 	unsigned int line_no = 1;
@@ -19,7 +20,7 @@ int main(int argc, char *argv[])
 	fp = fopen(argv[1], "r");
 	if (fp == NULL)
 		erropen(argv[1]);
-	while (fgets(line, sizeof(line), fp))
+	while (getline(&line, &len, fp) != -1)
 	{
 		if (*line == '\n')
 		{
@@ -42,6 +43,7 @@ int main(int argc, char *argv[])
 		code[0].f(&top, line_no);
 		line_no++;
 	}
+	free(line);
 	free_all(&top);
 	fclose(fp);
 	return (0);
