@@ -4,6 +4,16 @@
 #include <stdio.h>
 #include <unistd.h>
 #include <stdlib.h>
+#include <string.h>
+
+#define OPCODES { \
+		{"push", push},\
+		{"pall", pall},\
+		{NULL, NULL} \
+	};
+
+void errargc(void);
+void erropen(char *s);
 
 /**
  * struct stack_s - doubly linked list representation of a stack (or queue)
@@ -34,5 +44,22 @@ typedef struct instruction_s
 	char *opcode;
 	void (*f)(stack_t **stack, unsigned int line_number);
 } instruction_t;
+/**
+ * struct omni_p - used to pass data to "push" function
+ * @value: pointer to value of new stack
+ *
+ * Desc: global structure used to pass data around functions easily
+ */
+typedef struct omni_p
+{
+	char *value;
+} omni;
+omni global;
+void push(stack_t **stack, unsigned int line_number);
+void pall(stack_t **stack, unsigned int line_number __attribute__((unused)));
+stack_t *add_node(stack_t **stack, int i);
+void print_all(stack_t **stack);
+void free_all(stack_t **stack);
+instruction_t instruct(instruction_t opc[], char *in, unsigned int l);
 
 #endif
