@@ -11,6 +11,7 @@
 		{"pint", pint},\
 		{"pop", pop},\
 		{"swap", swap},\
+		{"add", add},\
 		{NULL, NULL} \
 	};
 
@@ -66,5 +67,6 @@ instruction_t instruct(instruction_t opc[], char *in, unsigned int l);
 void pop(stack_t **stack, unsigned int line_number);
 void pint(stack_t **stack, unsigned int line_number);
 void swap(stack_t **stack, unsigned int line_number);
+void add(stack_t **stack, unsigned int line_number);
 
 #endif
