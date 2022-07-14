@@ -28,7 +28,7 @@ int main(int argc, char *argv[])
 			continue;
 		}
 		ptr1 = strtok(line, " \t\n");
-		if (!ptr1 || ptr1 == '#')
+		if (!ptr1)
 		{
 			line_no++;
 			continue;
