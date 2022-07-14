@@ -34,11 +34,6 @@ int main(int argc, char *argv[])
 			continue;
 		}
 		global.value = strtok(NULL, " \t\n");
-		if (strcmp(ptr1, "push") == 0 && global.value == NULL)
-		{
-			fprintf(stderr, " L%d: usage: push integer\n", line_no);
-			exit(EXIT_FAILURE);
-		}
 		code[0] = instruct(opc, ptr1, line_no);
 		code[0].f(&top, line_no);
 		line_no++;
