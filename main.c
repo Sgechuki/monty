@@ -23,16 +23,12 @@ int main(int argc, char *argv[])
 	while (getline(&line, &len, fp) != -1)
 	{
 		if (*line == '\n')
-		{
 			line_no++;
 			continue;
-		}
 		ptr1 = strtok(line, " \t\n");
 		if (!ptr1)
-		{
 			line_no++;
 			continue;
-		}
 		global.value = strtok(NULL, " \t\n");
 		if (strcmp(ptr1, "push") == 0 && global.value == NULL)
 		{
@@ -44,9 +40,7 @@ int main(int argc, char *argv[])
 		line_no++;
 	}
 	if (line != NULL)
-	{
 		free(line);
-	}
 	free_all(&top);
 	fclose(fp);
 	return (0);
