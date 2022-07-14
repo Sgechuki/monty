@@ -1,30 +1,20 @@
-#ifndef _MONTY_H_
-#define _MONTY_H_
+#ifndef MONTY_H
+#define MONTY_H
 
-#include <stdlib.h>
 #include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
-#include <sys/types.h>
-#include <sys/stat.h>
-#include <fcntl.h>
-#include <unistd.h>
+#include <ctype.h>
 
-/**
- * struct var_s - struct to contain the main variables of the Monty interpreter
- * @queue: flag to determine if in stack vs queue mode
- * @stack_len: length of the stack
- */
-typedef struct var_s
-{
-	int queue;
-	size_t stack_len;
-} var_t;
+#define OPCODES { \
+		{"push", push},\
+		{"pall", pall},\
+		{"pint", pint},\
+		{NULL, NULL} \
+	};
 
-#define STACK 0
-#define QUEUE 1
-
-/* global struct to hold flag for queue and stack length */
-extern var_t var;
+void errargc(void);
+void erropen(char *s);
 
 /**
  * struct stack_s - doubly linked list representation of a stack (or queue)
@@ -33,7 +23,7 @@ extern var_t var;
  * @next: points to the next element of the stack (or queue)
  *
  * Description: doubly linked list node structure
- * for stack, queues, LIFO, FIFO Holberton project
+ * for stack, queues, LIFO, FIFO
  */
 typedef struct stack_s
 {
@@ -43,41 +33,35 @@ typedef struct stack_s
 } stack_t;
 
 /**
- * struct instruction_s - opcoode and its function
+ * struct instruction_s - opcode and its function
  * @opcode: the opcode
  * @f: function to handle the opcode
  *
  * Description: opcode and its function
- * for stack, queues, LIFO, FIFO Holberton project
+ * for stack, queues, LIFO, FIFO
  */
 typedef struct instruction_s
 {
 	char *opcode;
 	void (*f)(stack_t **stack, unsigned int line_number);
 } instruction_t;
+/**
+ * struct omni_p - used to pass data to "push" function
+ * @value: pointer to value of new stack
+ *
+ * Desc: global structure used to pass data around functions easily
+ */
+typedef struct omni_p
+{
+	char *value;
+} omni;
+omni global;
+void push(stack_t **stack, unsigned int line_number);
+void pall(stack_t **stack, unsigned int line_number __attribute__((unused)));
+void pint(stack_t **stack, unsigned int line_number);
+stack_t *add_node(stack_t **stack, int i);
+void print_all(stack_t **stack);
+void free_all(stack_t **stack);
+instruction_t instruct(instruction_t opc[], char *in, unsigned int l);
 
-void get_op(char *op, stack_t **stack, unsigned int line_number);
-void m_push(stack_t **stack, unsigned int line_number);
-void m_push2(stack_t **stack, int n);
-void m_pall(stack_t **stack, unsigned int line_number);
-void m_pint(stack_t **stack, unsigned int line_number);
-void m_pop(stack_t **stack, unsigned int line_number);
-void m_swap(stack_t **stack, unsigned int line_number);
-void m_add(stack_t **stack, unsigned int line_number);
-void m_nop(stack_t **stack, unsigned int line_number);
-void m_sub(stack_t **stack, unsigned int line_number);
-void m_mul(stack_t **stack, unsigned int line_number);
-void m_div(stack_t **stack, unsigned int line_number);
-void m_mod(stack_t **stack, unsigned int line_number);
-void rotl(stack_t **stack, unsigned int line_number);
-void rotr(stack_t **stack, unsigned int line_number);
-void m_stack(stack_t **stack, unsigned int line_number);
-void m_queue(stack_t **stack, unsigned int line_number);
-void m_pchar(stack_t **stack, unsigned int line_number);
-void m_pstr(stack_t **stack, unsigned int line_number);
-void free_stack(int status, void *arg);
-void m_fs_close(int status, void *arg);
-void free_lineptr(int status, void *arg);
-stack_t *add_node(stack_t **stack, const int n);
-
-#endif /* _MONTY_H_ */
+#endif
