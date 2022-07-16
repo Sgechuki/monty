@@ -40,7 +40,7 @@ void readline(FILE *fp)
 			continue;
 		}
 		ptr1 = strtok(line, " \t\n");
-		if (!ptr1)
+		if (!ptr1 || ptr1[0] == '#')
 		{
 			line_no++;
 			continue;
