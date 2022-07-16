@@ -8,7 +8,7 @@
  */
 int main(int argc, char *argv[])
 {
-	FILE *fp, fd;
+	FILE *fp;
 
 	if (argc != 2)
 		errargc();
