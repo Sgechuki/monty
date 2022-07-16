@@ -8,18 +8,30 @@
  */
 int main(int argc, char *argv[])
 {
-	char *line = NULL, *ptr1;
-	size_t len = 0;
-	stack_t *top = NULL;
-	FILE *fp;
-	unsigned int line_no = 1;
-	instruction_t code[1], opc[] = OPCODES;
+	FILE *fp, fd;
 
 	if (argc != 2)
 		errargc();
 	fp = fopen(argv[1], "r");
 	if (fp == NULL)
 		erropen(argv[1]);
+	readline(fp);
+	return (0);
+}
+
+/**
+ * readline - takes opened files and reads line by line
+ * @fp: open file
+ *
+ */
+void readline(FILE *fp)
+{
+	char *line = NULL, *ptr1;
+	size_t len = 0;
+	stack_t *top = NULL;
+	unsigned int line_no = 1;
+	instruction_t code[1], opc[] = OPCODES;
+
 	while (getline(&line, &len, fp) != -1)
 	{
 		if (*line == '\n')
@@ -44,7 +56,6 @@ int main(int argc, char *argv[])
 	}
 	free_all(&top);
 	fclose(fp);
-	return (0);
 }
 
 /**

@@ -61,6 +61,7 @@ typedef struct omni_p
 omni global;
 void errargc(void);
 void erropen(char *s);
+void readline(FILE *fp);
 void push(stack_t **stack, unsigned int line_number);
 void pall(stack_t **stack, unsigned int line_number __attribute__((unused)));
 stack_t *add_node(stack_t **stack, int i);
