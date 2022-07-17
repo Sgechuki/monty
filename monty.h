@@ -17,6 +17,7 @@
 		{"div", divi},\
 		{"mul", mul},\
 		{"mod", mod},\
+		{"pchar", pchar},\
 		{NULL, NULL} \
 	};
 
@@ -80,5 +81,6 @@ void mul(stack_t **stack, unsigned int line_number);
 int isnumber(char *str);
 void divi(stack_t **stack, unsigned int line_number);
 void mod(stack_t **stack, unsigned int line_number);
+void pchar(stack_t **stack, unsigned int line_number);
 
 #endif
